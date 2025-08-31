@@ -348,7 +348,7 @@ export function EnvironmentVariables({
     const isConflict = !!envVar.key && Object.hasOwn(workspaceVars, envVar.key)
     return (
       <>
-        <div key={envVar.id || originalIndex} className={`${GRID_COLS} items-center`}>
+        <div className={`${GRID_COLS} items-center`}>
           <Input
             data-input-type='key'
             value={envVar.key}
@@ -521,9 +521,9 @@ export function EnvironmentVariables({
               <div className='mt-8 mb-2 text-[13px] font-medium text-foreground'>
                 Personal Environment
               </div>
-              {filteredEnvVars.map(({ envVar, originalIndex }) =>
-                renderEnvVarRow(envVar, originalIndex)
-              )}
+              {filteredEnvVars.map(({ envVar, originalIndex }) => (
+                <div key={envVar.id || originalIndex}>{renderEnvVarRow(envVar, originalIndex)}</div>
+              ))}
               {/* Show message when search has no results but there are variables */}
               {searchTerm.trim() && filteredEnvVars.length === 0 && envVars.length > 0 && (
                 <div className='flex h-full items-center justify-center text-muted-foreground text-sm'>
